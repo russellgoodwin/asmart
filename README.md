@@ -1,5 +1,5 @@
 asmart v0.1
-Russell Goodwin, Illumio Fiend CTO, 22-04-2024
+Russell Goodwin, Illumio Field CTO, 22-04-2024
 
 asmart, or 'Attack Surface Mitigation And Reporting Tool' is a tool to review a current Illumio environment and identify various metrics around Workloads, activity and exposure.
 
@@ -31,4 +31,4 @@ asmart.conf is a json configuration file for the tool itself. Allowing variables
 
 1) Protocol scores - where risk scores are configured for the in scope protocols.
 2) devicecount - The number of workloads in the environment under analsysis. This metric is used to calculate exposure scores.
-3) queryhours - This sets the delta time from now for traffic data queries. 168 hours is the default, and looks at 7 days of data.
+3) queryhours - This sets the delta time from current time for traffic data queries. 168 hours is the default, and looks at 7 days of data.
