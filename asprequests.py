@@ -28,8 +28,10 @@ import argparse
 
 
 ## Set some global variables
+configfile = "asprequests.conf"
 settings = configparser.ConfigParser()
-settings.read('asprequests.conf')
+settings.read(configfile)
+
 
 defaultFQDN = settings.get('pce','defaultFQDN')
 defaultPort = settings.get('pce','defaultPort')
@@ -69,6 +71,24 @@ def main():
         print( output['response'])
     else:
         print("%s (HTTP code:%s)" % (output['result'],output['HTTPcode']))
+
+
+def checkconfig():
+
+    apikeyok = "0123456789abcdef"
+    
+    checkapisecret = all(c in apikeyok for c in settings.get('user','apisecret'))
+    if checkapisecret == False or len(settings.get('user','apisecret')) != 64:
+        sys.exit("API secret appears invalid, Check formatting in 'asprequests.conf' config file")
+
+    checkapikey1 = all(c in apikeyok for c in settings.get('user','apikey').split('_')[-1])
+    checkapikey2 = len(settings.get('user','apikey').split('_')[-1])
+    checkapikey3 = settings.get('user','apikey').startswith('api_')
+    if checkapikey1 == False or checkapikey2 != 17 or checkapikey3 == False:
+        sys.exit("API key appears invalid, Check formatting in 'asprequests.conf' config file")
+
+    if not str(settings.get('pce','orgID')).isnumeric():
+        sys.exit("Check Org ID is correct and correcly formated in 'asprequests.conf' config file")
 
 
 def getorg():

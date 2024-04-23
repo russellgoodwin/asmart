@@ -5,7 +5,7 @@ import json
 
 def main():
 
-    configfile = 'exposure.conf'
+    configfile = 'asmart.conf'
     config = getconfig(configfile)
 
     orgID = asprequests.getorg()

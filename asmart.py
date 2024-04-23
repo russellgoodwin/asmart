@@ -17,7 +17,9 @@ import sys
 MAX_THREADS = 10
 
 def main():
-    configfile = 'exposure.conf'
+
+    asprequests.checkconfig()
+    configfile = 'asmart.conf'
     config = getconfig(configfile)
     orgID = asprequests.getorg()
     config['orgID'] = orgID
@@ -65,6 +67,7 @@ def grouper(iterable, n, *, incomplete='fill', fillvalue=None):
 def getconfig(configfile):
     with open(configfile) as conf:
         config = json.load(conf)
+
     return config
 
 
